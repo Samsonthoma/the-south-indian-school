@@ -5,11 +5,11 @@ import qrcode
 from urllib.parse import quote
 
 # Config
-INPUT_FILE = "students.csv"
-OUTPUT_DIR = "pay"
+INPUT_FILE = "school-payments/students.csv"
+OUTPUT_DIR = "school-payments/pay"
 QR_DIR = os.path.join(OUTPUT_DIR, "qrs")
 UPI_ID = "8052508895@okbizaxis"
-MERCHANT_NAME = "TheSouthIndianSchool"
+MERCHANT_NAME = "The South Indian School"
 CURRENCY = "INR"
 
 def load_students(path):
