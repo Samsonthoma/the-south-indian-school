@@ -117,6 +117,8 @@ def make_html(student_id, student_name, amount, upi_link):
 
 def main():
     students = load_students(INPUT_FILE)
+    print(f"🔍 Loading from: {os.path}")
+    print(f"📦 Processing {len(students)} students...")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(QR_DIR, exist_ok=True)
 
