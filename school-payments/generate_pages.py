@@ -31,6 +31,16 @@ def make_qr(upi_link, filename):
     qr = qrcode.make(upi_link)
     qr.save(filename)
 
+GA_TRACKING_BLOCK = """<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKDWXYKMY6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CKDWXYKMY6');
+</script>
+"""
+
 def make_html(student_id, student_name, amount, upi_link):
     qr_path = f"qrs/{student_id}.png"
     return f"""<!DOCTYPE html>
@@ -40,6 +50,7 @@ def make_html(student_id, student_name, amount, upi_link):
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pay ₹{amount} | {MERCHANT_NAME}</title>
   <meta http-equiv="refresh" content="0; url={upi_link}" />
+  {GA_TRACKING_BLOCK}
   <style>
     body {{
       font-family: 'Segoe UI', sans-serif;
