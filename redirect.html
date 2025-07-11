@@ -1,116 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Redirecting to WhatsApp Channel</title>
   <style>
     body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
       overflow: hidden;
-      font-family: 'Segoe UI', 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #43cea2, #185a9d);
+      font-family: 'Segoe UI','Roboto',sans-serif;
       color: #fff;
     }
-
     .container {
-      position: relative;
+      position: relative; width: 300px; height: 360px;
       text-align: center;
-      width: 300px;
-      height: 360px;
     }
-
-    /* School logo pops in */
+    /* school logo pop-in */
     .school-logo {
-      width: 80px;
-      height: 80px;
+      width: 80px; height: 80px;
       border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       margin: 0 auto 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      opacity: 0; transform: scale(0.5);
       animation: popIn 0.8s ease-out forwards;
-      opacity: 0;
     }
     @keyframes popIn {
-      from { opacity: 0; transform: scale(0.5); }
-      to   { opacity: 1; transform: scale(1); }
+      to { opacity: 1; transform: scale(1); }
     }
-
-    /* Notices flying toward the WhatsApp icon */
+    /* flying notices */
     .notice {
       position: absolute;
-      background: #fff;
-      color: #185a9d;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      background: #fff; color: #185a9d;
+      padding: 0.5rem 1rem; border-radius: 6px;
+      font-weight: bold; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       animation: fly 3s ease-in forwards;
     }
-    .notice:nth-of-type(2) { top: 60px;  left: -140px; animation-delay: 0s; }
+    .notice:nth-of-type(2) { top:  60px; left: -140px; animation-delay: 0s;   }
     .notice:nth-of-type(3) { top: 140px; left: -160px; animation-delay: 0.6s; }
     .notice:nth-of-type(4) { top: 220px; left: -180px; animation-delay: 1.2s; }
-
     @keyframes fly {
       to {
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%) scale(0.3);
+        left: 50%; top: 50%;
+        transform: translate(-50%,-50%) scale(0.3);
         opacity: 0;
       }
     }
-
-    /* WhatsApp icon pulses at center */
+    /* pulsing WhatsApp icon */
     .whatsapp-icon {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 64px;
+      left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 64px; opacity: 0.9;
       animation: pulse 1s infinite ease-in-out;
-      opacity: 0.9;
     }
     @keyframes pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50%      { transform: translate(-50%, -50%) scale(1.2); }
+      0%,100% { transform: translate(-50%,-50%) scale(1); }
+      50%      { transform: translate(-50%,-50%) scale(1.2); }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- School logo -->
     <img
       src="https://samsonthoma.github.io/the-south-indian-school/logo.png"
       alt="School Logo"
       class="school-logo"
     />
-
     <div class="notice">Math Notice</div>
     <div class="notice">Chemistry Update</div>
     <div class="notice">Time Table</div>
-
     <div class="whatsapp-icon">📲</div>
   </div>
 
   <script>
-    window.onload = function () {
+    window.onload = () => {
       setTimeout(() => {
         const ua = navigator.userAgent.toLowerCase();
         const isAndroid = ua.includes('android');
-        const isIOS     = /iphone|ipad|ipod/.test(ua);
+        // your channel link
         const channelUrl = 'https://whatsapp.com/channel/0029Va9Tne5KwqSMcl5ZnE2B/195';
 
         if (isAndroid) {
-          // Android deep link
+          // Android: force Chrome to open the channel in WhatsApp
           window.location.href =
-            'intent://channel/0029Va9Tne5KwqSMcl5ZnE2B/195' +
-            '#Intent;scheme=https;package=com.whatsapp;end';
+            'intent://' +
+            channelUrl.replace(/^https?:\/\//, '') +
+            '#Intent;scheme=https;package=com.whatsapp;action=android.intent.action.VIEW;end';
         } else {
-          // iOS & fallback
+          // iOS & desktop: rely on the universal link
           window.location.href = channelUrl;
         }
       }, 3000);
