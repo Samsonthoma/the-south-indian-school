@@ -3,60 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Redirecting to WhatsApp</title>
+  <title>Redirecting to WhatsApp Channel</title>
   <style>
-    body {
+    body, html {
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #43cea2, #185a9d);
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-      font-family: 'Segoe UI', 'Roboto', sans-serif;
       color: #fff;
     }
 
     .container {
-      text-align: center;
       position: relative;
+      text-align: center;
+      width: 300px;
+      height: 360px;
     }
 
+    /* School logo pops in */
     .school-logo {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-      margin-bottom: 1.2rem;
-      animation: popIn 1s ease forwards;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      margin: 0 auto 1rem;
+      animation: popIn 0.8s ease-out forwards;
+      opacity: 0;
     }
-
     @keyframes popIn {
-      from {
-        opacity: 0;
-        transform: scale(0.5);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.5); }
+      to   { opacity: 1; transform: scale(1); }
     }
 
+    /* Notices flying toward the WhatsApp icon */
     .notice {
       position: absolute;
       background: #fff;
       color: #185a9d;
-      padding: 0.6rem 1rem;
+      padding: 0.5rem 1rem;
       border-radius: 6px;
       font-weight: bold;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      animation: fly 2.5s ease-in forwards;
+      animation: fly 3s ease-in forwards;
     }
-
-    .notice:nth-child(2) { top: 70px; left: -120px; animation-delay: 0s; }
-    .notice:nth-child(3) { top: 140px; left: -140px; animation-delay: 0.4s; }
-    .notice:nth-child(4) { top: 210px; left: -160px; animation-delay: 0.8s; }
+    .notice:nth-of-type(2) { top: 60px;  left: -140px; animation-delay: 0s; }
+    .notice:nth-of-type(3) { top: 140px; left: -160px; animation-delay: 0.6s; }
+    .notice:nth-of-type(4) { top: 220px; left: -180px; animation-delay: 1.2s; }
 
     @keyframes fly {
       to {
@@ -67,22 +64,30 @@
       }
     }
 
+    /* WhatsApp icon pulses at center */
     .whatsapp-icon {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       font-size: 64px;
-      margin-top: 220px;
       animation: pulse 1s infinite ease-in-out;
+      opacity: 0.9;
     }
-
     @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.2); opacity: 1; }
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50%      { transform: translate(-50%, -50%) scale(1.2); }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- Replace the src below with the actual logo image URL -->
-    <img src="https://samsonthoma.github.io/the-south-indian-school/logo.png" alt="School Logo" class="school-logo" />
+    <!-- School logo -->
+    <img
+      src="https://samsonthoma.github.io/the-south-indian-school/logo.png"
+      alt="School Logo"
+      class="school-logo"
+    />
 
     <div class="notice">Math Notice</div>
     <div class="notice">Chemistry Update</div>
@@ -95,16 +100,20 @@
     window.onload = function () {
       setTimeout(() => {
         const ua = navigator.userAgent.toLowerCase();
-        const android = ua.includes("android");
-        const ios = /iphone|ipad|ipod/.test(ua);
-        const message = encodeURIComponent("Check out this WhatsApp channel https://whatsapp.com/channel/0029Va9Tne5KwqSMcl5ZnE2B/195");
+        const isAndroid = ua.includes('android');
+        const isIOS     = /iphone|ipad|ipod/.test(ua);
+        const channelUrl = 'https://whatsapp.com/channel/0029Va9Tne5KwqSMcl5ZnE2B/195';
 
-        if (android) {
-          window.location.href = `intent://send?text=${message}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.SEND;end`;
-        } else if (ios) {
-          window.location.href = `whatsapp://send?text=${message}`;
+        if (isAndroid) {
+          // Android deep link
+          window.location.href =
+            'intent://channel/0029Va9Tne5KwqSMcl5ZnE2B/195' +
+            '#Intent;scheme=https;package=com.whatsapp;end';
+        } else {
+          // iOS & fallback
+          window.location.href = channelUrl;
         }
-      }, 2500);
+      }, 3000);
     };
   </script>
 </body>
