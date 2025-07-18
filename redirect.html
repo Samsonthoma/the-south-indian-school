@@ -2,155 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Redirecting to WhatsApp Channel</title>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CKDWXYKMY6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CKDWXYKMY6');
-</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opening WhatsApp Channel...</title>
   <style>
-    /*--------------- Base Styles ---------------*/
+    :root {
+      --bg-color: #f5f7fa;
+      --accent: #19b3a7;
+      --card-bg: #ffffff;
+      --text-color: #2c3e50;
+      --shadow: rgba(0,0,0,0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body, html {
-      margin: 0; padding: 0;
-      width: 100%; height: 100%;
-      overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #43cea2, #185a9d);
-      font-family: 'Segoe UI','Roboto',sans-serif;
-      color: #fff;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .container {
-      position: relative;
-      width: 300px; height: 400px;
+
+    .card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px var(--shadow);
       text-align: center;
+      max-width: 360px;
+      position: relative;
+      animation: fadeIn 1s ease forwards;
     }
 
-    /*------------ School Logo Pop-In -----------*/
-    .school-logo {
-      width: 80px; height: 80px;
-      margin: 0 auto 1rem;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      opacity: 0; transform: scale(0.5);
-      animation: popIn 0.8s ease-out forwards;
-    }
-    @keyframes popIn {
-      to { opacity: 1; transform: scale(1); }
+      margin-bottom: 1rem;
+      box-shadow: 0 0 16px var(--shadow);
     }
 
-    /*-------------- Paper Notice --------------*/
-    .notice {
+    .notice-slide {
       position: absolute;
-      width: 80px; height: 100px;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      padding: 0.5rem;
-      font-size: 0.75rem;
-      color: #185a9d;
-      /* faint rule lines */
-      background-image: linear-gradient(#ddd 1px, transparent 1px);
-      background-size: 100% 10px;
-      /* flight path */
-      animation: fly 3s ease-in forwards;
+      background-color: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: slideIn 3s ease-out forwards;
     }
-    /* stagger positions & delays */
-    .notice:nth-of-type(2) { top: 60px;  left: -140px; animation-delay: 0s; }
-    .notice:nth-of-type(3) { top: 140px; left: -160px; animation-delay: 0.6s; }
-    .notice:nth-of-type(4) { top: 220px; left: -180px; animation-delay: 1.2s; }
 
-    @keyframes fly {
+    .notice-slide:nth-child(2) { left: -150px; top: 40px; animation-delay: 0.5s; }
+    .notice-slide:nth-child(3) { left: -170px; top: 100px; animation-delay: 1s; }
+    .notice-slide:nth-child(4) { left: -190px; top: 160px; animation-delay: 1.5s; }
+
+    @keyframes slideIn {
       to {
-        left: 50%; top: 50%;
-        transform: translate(-50%,-50%) scale(0.3);
+        left: 50%;
+        transform: translateX(-50%);
         opacity: 0;
       }
     }
 
-    /*--------- Custom WhatsApp Icon -----------*/
-    .whatsapp-icon {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%,-50%);
-      width: 64px; height: 64px;
-      animation: pulse 1s infinite ease-in-out;
-      opacity: 0.9;
-    }
-    @keyframes pulse {
-      0%,100% { transform: translate(-50%,-50%) scale(1); }
-      50%     { transform: translate(-50%,-50%) scale(1.2); }
+    .whatsapp-circle {
+      margin-top: 2rem;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background-color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px var(--accent);
+      animation: glowPulse 2s infinite ease-in-out;
     }
 
-    /*------------- Fallback Button ------------*/
-    .fallback-btn {
-      position: absolute;
-      bottom: -60px; left: 50%;
-      transform: translateX(-50%);
-      padding: 0.6rem 1.2rem;
-      background: linear-gradient(90deg, #185a9d, #43cea2);
-      color: #fff; border: none; border-radius: 6px;
-      font-weight: bold; cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      transition: transform 0.2s ease;
+    @keyframes glowPulse {
+      0%,100% { box-shadow: 0 0 8px var(--accent); }
+      50%     { box-shadow: 0 0 16px var(--accent); }
     }
-    .fallback-btn:hover {
-      transform: translateX(-50%) scale(1.05);
+
+    .whatsapp-circle img {
+      width: 36px;
+      height: 36px;
+    }
+
+    .fallback {
+      margin-top: 1.5rem;
+      background-color: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1.4rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .fallback:hover {
+      background-color: #149f97;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- School logo -->
+  <div class="card">
     <img
       src="https://samsonthoma.github.io/the-south-indian-school/logo.png"
       alt="School Logo"
-      class="school-logo"
+      class="logo"
     />
 
-    <!-- Placeholder for injected paper notices -->
-    
-    <!-- Custom WhatsApp icon (replace with your own if desired) -->
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-      alt="WhatsApp Icon"
-      class="whatsapp-icon"
-    />
+    <!-- Sliding notices -->
+    <div class="notice-slide">Notice: Exam on Monday</div>
+    <div class="notice-slide">Exam: Ist Unit Test</div>
+    <div class="notice-slide">Time Table Released</div>
 
-    <!-- Fallback retry button -->
-    <button class="fallback-btn" onclick="retryRedirect()">
-      Try Opening WhatsApp Again
-    </button>
+    <div class="whatsapp-circle">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+        alt="WhatsApp"
+      />
+    </div>
+
+    <button class="fallback" onclick="retryRedirect()">Retry Opening WhatsApp</button>
   </div>
 
   <script>
-    // Your notice texts (can be loaded from an API)
-    const notices = [
-      "Notice: Exam on Monday",
-      "Exam: Ist Unit Test",
-      "Time Table Released"
-    ];
-
-    // Inject paper notices into the DOM
-    const container = document.querySelector(".container");
-    notices.forEach((text, i) => {
-      const note = document.createElement("div");
-      note.className = "notice";
-      note.textContent = text;
-      // staggered start positions & delays
-      note.style.top = `${60 + i * 80}px`;
-      note.style.left = `${-140 - i * 20}px`;
-      note.style.animationDelay = `${i * 0.6}s`;
-      container.appendChild(note);
-    });
-
-    // Redirect logic
-    function redirectToChannel() {
+    const redirectToChannel = () => {
       const ua = navigator.userAgent.toLowerCase();
       const isAndroid = ua.includes("android");
       const channelUrl = "https://whatsapp.com/channel/0029Va9Tne5KwqSMcl5ZnE2B/198";
@@ -163,13 +152,12 @@
       } else {
         window.location.href = channelUrl;
       }
-    }
+    };
 
-    function retryRedirect() {
+    const retryRedirect = () => {
       redirectToChannel();
-    }
+    };
 
-    // Auto-redirect after animation completes (3 seconds)
     window.onload = () => setTimeout(redirectToChannel, 3000);
   </script>
 </body>
