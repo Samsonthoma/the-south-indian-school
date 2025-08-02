@@ -139,8 +139,7 @@ def main():
         note = f"Fee {student_id} {student_name}"
         tn = quote(note)
         upi_link = (
-            f"upi://pay?pa={UPI_ID}&pn={quote(MERCHANT_NAME)}"
-            f"&am={float_amount}&tn={tn}&cu={CURRENCY}"
+            f"upi://pay?pa={UPI_ID}&pn={quote(MERCHANT_NAME)}&am={float_amount}&tn={tn}&cu={CURRENCY}"
         )
 
         qr_file = os.path.join(QR_DIR, f"{student_id}.png")
