@@ -1,170 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Arriving at The South Indian School...</title>
   <style>
-    body, html {
+    /*------------------------
+      Global & Background
+    ------------------------*/
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html, body {
       height: 100%;
-      background: linear-gradient(to top, #a0cfff, #ffffff);
-      overflow: hidden;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    .road {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 120px;
-      background: #444;
-    }
-
-    .lane-lines {
-      position: absolute;
-      bottom: 60px;
-      width: 100%;
-      height: 4px;
-      background: repeating-linear-gradient(to right, white 0px, white 40px, transparent 40px, transparent 80px);
-    }
-
-    .school {
-      position: absolute;
-      right: 50px;
-      bottom: 120px;
-      width: 120px;
-      height: 100px;
-      background: #fefefe;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      text-align: center;
-      padding: 1rem;
-      font-weight: bold;
-      color: #185a9d;
-    }
-
-    .bus {
-      position: absolute;
-      bottom: 130px;
-      left: -200px;
-      width: 160px;
-      height: 80px;
-      background: #f9c334;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      animation: driveIn 4s ease-in-out forwards;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      color: #333;
+      background: radial-gradient(circle at top, #d0e7ff, #fff);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
     }
 
-    @keyframes driveIn {
-      0% { left: -200px; }
-      100% { left: calc(100% - 200px); }
-    }
-
-    .wheel {
-      position: absolute;
-      bottom: -10px;
-      width: 30px;
-      height: 30px;
-      background: #000;
-      border-radius: 50%;
-    }
-
-    .wheel.left {
-      left: 20px;
-    }
-
-    .wheel.right {
-      right: 20px;
-    }
-
-    .notice {
-      position: absolute;
-      background: #ffffff;
+    /*------------------------
+      Loader Wrapper
+    ------------------------*/
+    .loader-wrapper {
+      text-align: center;
       color: #185a9d;
-      padding: 0.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      animation: floatUp 3s ease-out forwards;
     }
 
-    .notice:nth-child(2) { top: 300px; left: 150px; animation-delay: 0.5s; }
-    .notice:nth-child(3) { top: 340px; left: 180px; animation-delay: 1s; }
-    .notice:nth-child(4) { top: 380px; left: 210px; animation-delay: 1.5s; }
-
-    @keyframes floatUp {
-      to {
-        transform: translateY(-100px) scale(0.8);
-        opacity: 0;
-      }
+    /*------------------------
+      Spinning Ring + Bus Icon
+    ------------------------*/
+    .ring {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+      border: 8px solid rgba(24, 90, 157, 0.2);
+      border-top-color: #185a9d;
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
     }
 
-    .whatsapp-icon {
+    .ring::before {
+      content: '🚌';
       position: absolute;
-      right: 70px;
-      bottom: 230px;
-      width: 48px;
-      height: 48px;
-      opacity: 0;
-      animation: fadeIn 2s ease 4s forwards;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; transform: scale(1); }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /*------------------------
+      Bouncing Dots
+    ------------------------*/
+    .dots {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .dots span {
+      width: 12px;
+      height: 12px;
+      background: #185a9d;
+      border-radius: 50%;
+      animation: bounce 0.6s ease-in-out infinite both;
+    }
+
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-12px); }
+    }
+
+    /*------------------------
+      Loader Text
+    ------------------------*/
+    .loader-text {
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
     }
   </style>
 </head>
 <body>
-  <div class="road">
-    <div class="lane-lines"></div>
+  <div class="loader-wrapper">
+    <div class="ring"></div>
+    <div class="dots">
+      <span></span><span></span><span></span>
+    </div>
+    <div class="loader-text">Arriving at The South Indian School...</div>
   </div>
-
-  <div class="school">The South Indian School</div>
-
-  <div class="bus">
-      School Bus
-    <div class="wheel left"></div>
-    <div class="wheel right"></div>
-  </div>
-
-  <!-- Floating Notices -->
-  <div class="notice">Notice: Exam on Tuesday</div>
-  <div class="notice">Exam: Ist Unit Test</div>
-  <div class="notice">Time Table Update</div>
-
-  <!-- WhatsApp Icon -->
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-    alt="WhatsApp Channel"
-    class="whatsapp-icon"
-  />
 
   <script>
-    window.onload = () => {
+    // After 6 seconds, redirect to WhatsApp channel
+    window.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
+        const channelUrl = 'https://whatsapp.com/channel/0029Va9Tne5KwqSMcl5ZnE2B/200';
         const ua = navigator.userAgent.toLowerCase();
-        const isAndroid = ua.includes("android");
-        const channelUrl = "https://whatsapp.com/channel/0029Va9Tne5KwqSMcl5ZnE2B/199";
-
+        const isAndroid = ua.includes('android');
         if (isAndroid) {
-          window.location.href =
-            "intent://" +
-            channelUrl.replace(/^https?:\/\//, "") +
-            "#Intent;scheme=https;package=com.whatsapp;action=android.intent.action.VIEW;end";
+          window.location.href = 
+            'intent://' +
+            channelUrl.replace(/^https?:\/\//, '') +
+            '#Intent;scheme=https;package=com.whatsapp;action=android.intent.action.VIEW;end';
         } else {
           window.location.href = channelUrl;
         }
-      }, 6000); // enough time for animation
-    };
+      }, 6000);
+    });
   </script>
 </body>
 </html>
