@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The South Indian School - Excellence in Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23667eea" width="1200" height="600"/><path fill="%23764ba2" d="M0 400 Q300 300 600 400 T1200 400 V600 H0 Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Content Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-hidden {
+            display: none;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: var(--gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Programs */
+        .program-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .program-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Teachers Grid */
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .teacher-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .teacher-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--gradient);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            height: 250px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Contact Form */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Notices */
+        .notice-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 20px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .notice-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+        }
+
+        .notice-date {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                padding: 2rem;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">🎓 The South Indian School</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('programs')">Programs</a></li>
+                <li><a href="#" onclick="showPage('teachers')">Teachers</a></li>
+                <li><a href="#" onclick="showPage('exams')">Exams</a></li>
+                <li><a href="#" onclick="showPage('syllabus')">Syllabus</a></li>
+                <li><a href="#" onclick="showPage('gallery')">Gallery</a></li>
+                <li><a href="#" onclick="showPage('notices')">Notices</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>The South Indian School</h1>
+                <p>Excellence in Education | Nurturing Future Leaders</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="showPage('about')">Discover More</a>
+                    <a href="#" class="btn btn-secondary" onclick="showPage('contact')">Admissions</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section>
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Academic Excellence</h3>
+                    <p>Comprehensive CBSE curriculum with focus on critical thinking and innovation. We maintain a 100% success rate in board examinations.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>Expert Faculty</h3>
+                    <p>Highly qualified and passionate educators dedicated to student growth and development with personalized attention.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏆</div>
+                    <h3>Holistic Development</h3>
+                    <p>Emphasis on sports, arts, music, and cultural activities alongside academics for well-rounded personality development.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>Modern Infrastructure</h3>
+                    <p>State-of-the-art smart classrooms, science labs, computer labs, library, and sports facilities for optimal learning.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌟</div>
+                    <h3>Values & Ethics</h3>
+                    <p>Strong emphasis on moral values, discipline, and character building to create responsible global citizens.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Individual Attention</h3>
+                    <p>Small class sizes ensure personalized attention to each student's unique learning needs and pace.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Page -->
+    <section id="about-page" class="section-hidden">
+        <h2 class="section-title">About The South Indian School</h2>
+        <div class="about-content">
+            <div class="about-image">🏫</div>
+            <div class="about-text">
+                <h3>Our Legacy</h3>
+                <p>The South Indian School stands as a premier educational institution committed to fostering academic excellence and personal growth. Our legacy of educational brilliance spans decades, where we have consistently provided a nurturing environment for students to thrive intellectually, socially, and emotionally.</p>
+                <p>We believe education is a collaborative effort between school, parents, and community. Our comprehensive approach ensures strong academic foundation while offering diverse extracurricular activities to cater to every student's potential.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 30px rgba(0,0,0,0.1);">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Important Exam Guidelines</h3>
+            <ul style="color: #666; line-height: 2;">
+                <li>Students must arrive 15 minutes before exam time</li>
+                <li>Valid ID card is mandatory for all examinations</li>
+                <li>Use of electronic devices is strictly prohibited</li>
+                <li>Results will be published within 15 days of completion</li>
+                <li>Revaluation requests accepted within 7 days of result declaration</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Syllabus Page -->
+    <section id="syllabus-page" class="section-hidden">
+        <h2 class="section-title">Curriculum & Syllabus</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666; font-size: 1.1rem;">
+            Our curriculum follows CBSE guidelines with enhanced focus on experiential learning and skill development.
+        </p>
+        
+        <div class="program-card" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">📚 Primary Section (I-V)</h3>
+            <p><strong>Core Subjects:</strong> English, Hindi, Mathematics, Environmental Studies, Computer Science, General Knowledge</p>
+            <p><strong>Co-Scholastic:</strong> Art & Craft, Music, Dance, Physical Education, Life Skills</p>
+        </div>
+
+        <div class="program-card" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">📖 Middle Section (VI-VIII)</h3>
+            <p><strong>Core Subjects:</strong> English, Hindi, Mathematics, Science, Social Science, Computer Science, Sanskrit/French</p>
+            <p><strong>Co-Scholastic:</strong> Work Education, Art Education, Physical & Health Education</p>
+        </div>
+
+        <div class="program-card" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">🎓 Secondary (IX-X)</h3>
+            <p><strong>Languages:</strong> English (Communicative), Hindi (Course A/B), Sanskrit/French</p>
+            <p><strong>Core:</strong> Mathematics (Standard/Basic), Science, Social Science</p>
+            <p><strong>Electives:</strong> Computer Applications, Information Technology, Artificial Intelligence</p>
+        </div>
+
+        <div class="program-card" style="margin-bottom: 2rem;">
+            <h3 style="font-size: 1.6rem; margin-bottom: 1rem;">🎯 Senior Secondary (XI-XII)</h3>
+            <p><strong>Science Stream:</strong> Physics, Chemistry, Mathematics/Biology, English, Computer Science/Physical Education</p>
+            <p><strong>Commerce Stream:</strong> Accountancy, Business Studies, Economics, English, Mathematics/Informatics Practices</p>
+            <p><strong>Humanities Stream:</strong> History, Political Science, Economics, English, Psychology/Sociology</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📥</div>
+                <h3>Download Syllabus</h3>
+                <p>Click below to download detailed syllabus PDFs for each class</p>
+                <button class="btn btn-primary" style="margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Download All</button>
+            </div>
+            <div class="card">
+                <div class="card-icon">📖</div>
+                <h3>Study Material</h3>
+                <p>Access textbooks, reference books, and supplementary learning resources</p>
+                <button class="btn btn-primary" style="margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">View Resources</button>
+            </div>
+            <div class="card">
+                <div class="card-icon">📅</div>
+                <h3>Academic Calendar</h3>
+                <p>Annual academic calendar with important dates and holidays</p>
+                <button class="btn btn-primary" style="margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">View Calendar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Page -->
+    <section id="gallery-page" class="section-hidden">
+        <h2 class="section-title">Photo Gallery</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666; font-size: 1.1rem;">
+            Capturing moments of learning, growth, and celebration at The South Indian School
+        </p>
+        <div class="gallery-grid">
+            <div class="gallery-item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <span>🏫</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Campus Tour</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <span>🎓</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Annual Day 2024</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <span>⚽</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Sports Day</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <span>🔬</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Science Exhibition</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <span>🎨</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Art Competition</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                <span>🎭</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Cultural Fest</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                <span>🏆</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Award Ceremony</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                <span>🌳</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Environment Day</div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                <span>📚</span>
+                <div style="position: absolute; bottom: 20px; color: white; font-size: 1rem;">Library Activities</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notices Page -->
+    <section id="notices-page" class="section-hidden">
+        <h2 class="section-title">Notices & Announcements</h2>
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="notice-item">
+                <div class="notice-date">📅 December 10, 2025</div>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Winter Vacation Notice</h3>
+                <p style="color: #666;">School will remain closed from December 23, 2025 to January 5, 2026 for winter break. Classes will resume on January 6, 2026. Enjoy the holidays with your family!</p>
+            </div>
+
+            <div class="notice-item">
+                <div class="notice-date">📅 December 8, 2025</div>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Annual Sports Day Registration</h3>
+                <p style="color: #666;">Registration open for Annual Sports Day 2026 scheduled on January 20-21, 2026. Students interested in participating should register with their respective sports teachers by December 18, 2025.</p>
+            </div>
+
+            <div class="notice-item">
+                <div class="notice-date">📅 December 5, 2025</div>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Parent-Teacher Meeting</h3>
+                <p style="color: #666;">PTM scheduled for December 14, 2025 (Saturday) from 9:00 AM to 1:00 PM. Parents are requested to collect progress reports and discuss their child's academic performance with respective teachers.</p>
+            </div>
+
+            <div class="notice-item">
+                <div class="notice-date">📅 December 1, 2025</div>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Science Exhibition Results</h3>
+                <p style="color: #666;">Congratulations to all participants of the Inter-School Science Exhibition! Our school won First Prize in Robotics and Second Prize in Environmental Science. Detailed results available on the school website.</p>
+            </div>
+
+            <div class="notice-item">
+                <div class="notice-date">📅 November 28, 2025</div>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Admissions Open 2026-27</h3>
+                <p style="color: #666;">Admissions for Academic Year 2026-27 are now open for Classes Nursery to XI. Application forms available online and at the school office. Last date for submission: January 31, 2026.</p>
+            </div>
+
+            <div class="notice-item">
+                <div class="notice-date">📅 November 25, 2025</div>
+                <h3 style="color: var(--primary); margin-bottom: 0.5rem;">Fee Payment Reminder</h3>
+                <p style="color: #666;">Reminder to parents to pay Q3 fees by December 10, 2025. Online payment facility available on school portal. For queries, contact accounts department during office hours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact-page" class="section-hidden">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Send us a Message</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" placeholder="What is this regarding?" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea rows="5" placeholder="Write your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <div class="info-card">
+                    <h3>📍 Address</h3>
+                    <p style="color: #666;">The South Indian School<br>Education District<br>Lucknow, Uttar Pradesh, India</p>
+                </div>
+                <div class="info-card">
+                    <h3>📞 Contact Details</h3>
+                    <p style="color: #666;">
+                        <strong>Phone:</strong> +91-XXXX-XXXXXX<br>
+                        <strong>Email:</strong> info@southindianschool.edu.in<br>
+                        <strong>Website:</strong> www.southindianschool.edu.in
+                    </p>
+                </div>
+                <div class="info-card">
+                    <h3>🕒 Office Hours</h3>
+                    <p style="color: #666;">
+                        <strong>Monday - Friday:</strong> 8:00 AM - 4:00 PM<br>
+                        <strong>Saturday:</strong> 8:00 AM - 1:00 PM<br>
+                        <strong>Sunday:</strong> Closed
+                    </p>
+                </div>
+                <div class="info-card">
+                    <h3>🌐 Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="Twitter">🐦</a>
+                        <a href="#" title="LinkedIn">💼</a>
+                        <a href="#" title="YouTube">📺</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>The South Indian School</h3>
+                <p style="color: #ccc; margin-bottom: 1rem;">Nurturing minds, shaping futures. Excellence in education since establishment.</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">📷</a>
+                    <a href="#">🐦</a>
+                    <a href="#">💼</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#" onclick="showPage('home')">Home</a>
+                <a href="#" onclick="showPage('about')">About Us</a>
+                <a href="#" onclick="showPage('programs')">Programs</a>
+                <a href="#" onclick="showPage('teachers')">Faculty</a>
+                <a href="#" onclick="showPage('contact')">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Academic</h3>
+                <a href="#" onclick="showPage('syllabus')">Curriculum</a>
+                <a href="#" onclick="showPage('exams')">Examinations</a>
+                <a href="#" onclick="showPage('notices')">Notices</a>
+                <a href="#" onclick="showPage('gallery')">Gallery</a>
+                <a href="#">Alumni</a>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="#">Student Portal</a>
+                <a href="#">Parent Portal</a>
+                <a href="#">Online Library</a>
+                <a href="#">Career Counseling</a>
+                <a href="#">Fee Payment</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The South Indian School. All Rights Reserved. | Designed with ❤️ for Education</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = ['home', 'about', 'programs', 'teachers', 'exams', 'syllabus', 'gallery', 'notices', 'contact'];
+            pages.forEach(page => {
+                const element = document.getElementById(page + '-page');
+                if (element) {
+                    element.classList.add('section-hidden');
+                }
+            });
+
+            // Show selected page or home
+            if (pageId === 'home') {
+                document.getElementById('home-page').style.display = 'block';
+            } else {
+                document.getElementById('home-page').style.display = 'none';
+                const selectedPage = document.getElementById(pageId + '-page');
+                if (selectedPage) {
+                    selectedPage.classList.remove('section-hidden');
+                }
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Close mobile menu
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        // Toggle mobile menu
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            event.target.reset();
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>: 4rem;">
+            <h3 class="section-title" style="font-size: 2rem;">Our Mission & Vision</h3>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Mission</h3>
+                    <p>To empower students with knowledge, skills, and values they need to thrive in an ever-changing world, nurturing holistic development and enabling them to reach their full potential.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔭</div>
+                    <h3>Vision</h3>
+                    <p>To be a leading educational institution that shapes confident, compassionate, and well-rounded individuals ready to make a positive impact on society and the world.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⚖️</div>
+                    <h3>Values</h3>
+                    <p>Excellence, integrity, respect, innovation, and inclusivity form the core of our educational philosophy, guiding every decision and action we take.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Page -->
+    <section id="programs-page" class="section-hidden">
+        <h2 class="section-title">Academic Programs</h2>
+        <div class="program-card">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">🌱 Pre-Primary (Nursery - KG)</h3>
+            <p>Foundation years focusing on play-based learning, sensory development, and building social skills in a warm, nurturing environment.</p>
+        </div>
+        <div class="program-card">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">📖 Primary School (Class I - V)</h3>
+            <p>Building strong fundamentals in language, mathematics, science, and social studies with emphasis on reading, writing, and creative expression.</p>
+        </div>
+        <div class="program-card">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">🎓 Middle School (Class VI - VIII)</h3>
+            <p>Comprehensive curriculum introducing advanced concepts, critical thinking, and subject specialization with guidance counseling.</p>
+        </div>
+        <div class="program-card">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">🏆 Secondary School (Class IX - X)</h3>
+            <p>Board exam preparation with focus on core subjects, practical learning, and career guidance. 100% success rate in CBSE examinations.</p>
+        </div>
+        <div class="program-card">
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">🎯 Senior Secondary (Class XI - XII)</h3>
+            <p>Stream specialization in Science, Commerce, and Humanities with competitive exam coaching and university placement assistance.</p>
+        </div>
+
+        <h3 class="section-title" style="margin-top: 4rem; font-size: 2rem;">Co-Curricular Activities</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">⚽</div>
+                <h3>Sports</h3>
+                <p>Cricket, Football, Basketball, Volleyball, Athletics, Yoga, and professional coaching programs.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <h3>Arts & Crafts</h3>
+                <p>Drawing, Painting, Sculpture, Rangoli, Mehendi, and creative expression workshops.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎭</div>
+                <h3>Performing Arts</h3>
+                <p>Dance, Drama, Theatre, Music (Carnatic & Western), and annual cultural festival 'Prerna'.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔬</div>
+                <h3>Science Club</h3>
+                <p>Robotics, Coding, Science exhibitions, and hands-on experiments for curious minds.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <h3>Literary Club</h3>
+                <p>Debates, Elocution, Creative Writing, Book Club, and public speaking competitions.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌍</div>
+                <h3>Social Service</h3>
+                <p>Community outreach, environmental initiatives, and character development programs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Page -->
+    <section id="teachers-page" class="section-hidden">
+        <h2 class="section-title">Our Dedicated Faculty</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666; font-size: 1.1rem;">
+            Our passionate and experienced educators are committed to nurturing each student's potential and creating an inspiring learning environment.
+        </p>
+        <div class="teachers-grid">
+            <div class="teacher-card">
+                <div class="teacher-avatar">👨‍🏫</div>
+                <h3>Dr. Rajesh Kumar</h3>
+                <p style="color: var(--primary); font-weight: 600;">Principal</p>
+                <p>Ph.D. in Education, 25+ years experience</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍🏫</div>
+                <h3>Mrs. Priya Sharma</h3>
+                <p style="color: var(--primary); font-weight: 600;">Vice Principal</p>
+                <p>M.Ed., Mathematics Expert</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👨‍🔬</div>
+                <h3>Mr. Arun Nair</h3>
+                <p style="color: var(--primary); font-weight: 600;">Science Head</p>
+                <p>M.Sc. Physics, Research Scholar</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍💻</div>
+                <h3>Ms. Deepa Iyer</h3>
+                <p style="color: var(--primary); font-weight: 600;">Computer Science</p>
+                <p>B.Tech, Coding Specialist</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👨‍🎨</div>
+                <h3>Mr. Venkat Reddy</h3>
+                <p style="color: var(--primary); font-weight: 600;">Arts & Culture</p>
+                <p>M.A. Fine Arts, 15 years experience</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍🏫</div>
+                <h3>Mrs. Lakshmi Menon</h3>
+                <p style="color: var(--primary); font-weight: 600;">English Literature</p>
+                <p>M.A. English, Published Author</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👨‍⚕️</div>
+                <h3>Dr. Suresh Pillai</h3>
+                <p style="color: var(--primary); font-weight: 600;">Sports & Wellness</p>
+                <p>M.P.Ed., Former Athlete</p>
+            </div>
+            <div class="teacher-card">
+                <div class="teacher-avatar">👩‍🔬</div>
+                <h3>Ms. Anita Krishnan</h3>
+                <p style="color: var(--primary); font-weight: 600;">Chemistry</p>
+                <p>M.Sc. Chemistry, Lab Expert</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exams Page -->
+    <section id="exams-page" class="section-hidden">
+        <h2 class="section-title">Examination System</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📝</div>
+                <h3>Assessment Structure</h3>
+                <p><strong>Continuous Evaluation:</strong> Regular tests, assignments, and projects throughout the year.</p>
+                <p><strong>Mid-Term Exams:</strong> Comprehensive assessment in September-October.</p>
+                <p><strong>Final Exams:</strong> Annual examinations in February-March.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Grading System</h3>
+                <p>CBSE grading pattern for Classes I-XII with Grade Point Average (GPA) system. Regular parent-teacher meetings to discuss progress.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏅</div>
+                <h3>Board Examinations</h3>
+                <p><strong>Class X:</strong> CBSE Board Exams (All India)</p>
+                <p><strong>Class XII:</strong> CBSE Senior Secondary Certificate</p>
+                <p><strong>Success Rate:</strong> 100% in last 5 years</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📅</div>
+                <h3>Exam Schedule 2024-25</h3>
+                <p><strong>Unit Tests:</strong> July, September, November</p>
+                <p><strong>Half-Yearly:</strong> October 15-30</p>
+                <p><strong>Pre-Board:</strong> January 5-20</p>
+                <p><strong>Annual Exams:</strong> February 20 - March 15</p>
+            </div>
+        </div>
+
+        <div style="margin-top
